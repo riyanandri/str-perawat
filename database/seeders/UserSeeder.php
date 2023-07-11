@@ -15,22 +15,25 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-               'name'=>'Admin',
+               'nama'=>'Admin',
                'email'=>'admin@gmail.com',
                'type'=>1,
                'password'=> bcrypt('admin@123'),
+               'whatsapp'=>'6285823670112',
             ],
             [
-               'name'=>'Super Admin',
+               'nama'=>'Super Admin',
                'email'=>'superadmin@gmail.com',
                'type'=>2,
                'password'=> bcrypt('superadmin@123'),
+               'whatsapp'=>'6282145380579',
             ],
             [
-               'name'=>'Perawat',
+               'nama'=>'Perawat',
                'email'=>'perawat@gmail.com',
                'type'=>0,
                'password'=> bcrypt('perawat@123'),
+               'whatsapp'=>'6285824678340',
             ],
         ];
     

@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    Login - STR Perawat
+@endsection
+
 @section('content')
 <div class="auth-form">
     {{-- <div class="text-center mb-3">
@@ -10,7 +14,7 @@
         @csrf
         <div class="mb-3">
             <label class="mb-1"><strong>Email</strong></label>
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+            <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}">
             @if ($errors->has('email'))
                 <span class="text-danger">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -33,11 +37,11 @@
                     <label class="form-check-label" for="remember">Remember me</label>
                 </div>
             </div>
-            @if (Route::has('password.request'))
+            {{-- @if (Route::has('password.request'))
             <div class="mb-3">
                 <a href="{{ route('password.request') }}">Forgot Password?</a>
             </div>
-            @endif
+            @endif --}}
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary btn-block">Login</button>

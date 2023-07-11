@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,18 +21,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function perawatDashboard()
     {
-        return view('home');
+        return view('perawat_dashboard');
     }
 
-    public function adminHome()
+    public function adminDashboard()
     {
-        return view('adminHome');
+        return view('admin_dashboard');
     }
 
-    public function superAdminHome()
+    public function superAdminDashboard()
     {
-        return view('superAdminHome');
+        return view('superadmin_dashboard');
     }
 }

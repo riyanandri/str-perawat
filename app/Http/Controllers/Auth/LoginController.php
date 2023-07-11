@@ -51,6 +51,7 @@ class LoginController extends Controller
 
         $messages = [
             'email.required' => 'Email belum di isi!',
+            'email.email' => 'Email tidak valid, harus menyertakan @',
             'password.required' => 'Password belum di isi!'
         ];
         
@@ -62,11 +63,11 @@ class LoginController extends Controller
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
             if (auth()->user()->type == 'admin') {
-                return redirect()->route('admin.home');
+                return redirect()->route('admin.dashboard');
             }else if (auth()->user()->type == 'superadmin') {
-                return redirect()->route('superadmin.home');
+                return redirect()->route('superadmin.dashboard');
             }else{
-                return redirect()->route('home');
+                return redirect()->route('dashboard');
             }
         }else{
             return redirect()->back()->withErrors(

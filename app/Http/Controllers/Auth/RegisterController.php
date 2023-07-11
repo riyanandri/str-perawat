@@ -49,10 +49,21 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // $messages = [
+        //     'email.required' => 'Email belum di isi!',
+        //     'password.required' => 'Password belum di isi!'
+        // ];
+        
+        // $this->validate($request, [
+        //     'email' => 'required|email',
+        //     'password' => 'required|string',
+        // ], $messages);
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'whatsapp' => ['required', 'min:11', 'numeric'],
         ]);
     }
 
@@ -65,9 +76,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nama' => $data['nama'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'whatsapp' => $data['whatsapp'],
         ]);
     }
 }

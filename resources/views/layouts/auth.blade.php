@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- PAGE TITLE HERE -->
-	<title>{{ config('app.name', 'STR Perawat') }}</title>
+	<title>@yield('title')</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
@@ -40,6 +40,6 @@
     <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script>
-	<script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
+	{{-- <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script> --}}
 </body>
 </html>
