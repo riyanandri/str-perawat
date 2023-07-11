@@ -48,11 +48,16 @@ class LoginController extends Controller
     public function login(Request $request): RedirectResponse
     {   
         $input = $request->all();
-     
+
+        $messages = [
+            'email.required' => 'Email belum di isi!',
+            'password.required' => 'Password belum di isi!'
+        ];
+        
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required',
-        ]);
+            'password' => 'required|string',
+        ], $messages);
      
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
@@ -64,8 +69,11 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+            return redirect()->back()->withErrors(
+                [
+                    'email' => 'Email atau password yang anda masukkan tidak cocok!'
+                ]
+            );
         }
           
     }
