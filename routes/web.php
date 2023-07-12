@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\ProfesiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +26,9 @@ Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'perawatDashboard'])->name('dashboard');
 });
 
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/profesi', [ProfesiController::class, 'index'])->name('admin.profesi');
 });
 
 Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
