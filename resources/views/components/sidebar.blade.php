@@ -11,7 +11,7 @@
                     <span class="nav-text">Data Master</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.profesi') }}">Profesi</a></li>
+                    <li><a href="{{ route('profesi.index') }}">Profesi</a></li>
                     <li><a href="uc-nestable.html">Status Pegawai</a></li>
                     <li><a href="uc-noui-slider.html">Ruangan</a></li>
                     <li><a href="uc-sweetalert.html">Pendidikan</a></li>

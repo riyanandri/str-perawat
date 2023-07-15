@@ -57,4 +57,14 @@ class User extends Authenticatable
             get: fn ($value) =>  ["perawat", "admin", "superadmin"][$value],
         );
     }
+
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])->translatedFormat('l, j F Y : h:i a');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['updated_at'])->diffForHumans();
+    }
 }

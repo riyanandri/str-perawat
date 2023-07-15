@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             JenisPkSeeder::class,
             AreaSeeder::class,
             StatusPegawaiSeeder::class,
-            PendidikanSeeder::class,
         ]);
     }
 }

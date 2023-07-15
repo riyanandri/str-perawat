@@ -8,62 +8,34 @@
     Profesi
 @endsection
 
-@push('css')
-    <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-@endpush
-
 @section('content')
 <div class="container-fluid">
-				
-    <div class="row page-titles">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Master</a></li>
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Profesi</a></li>
-        </ol>
-    </div>
     <!-- row -->
-
-
     <div class="row">
-        <div class="col-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data Profesi</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example5" class="display" style="min-width: 845px">
-                            <thead>
-                                <tr>
-                                    <th>Nama Profesi</th>
-                                    <th>Ditambahkan</th>
-                                    <th>Diupdate</th>
-                                    <th width="10%">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($profesi as $item)
-                                <tr>
-                                    <td>{{ $item->nama_profesi }}</td>
-                                    <td>{{ $item->created_at->format('d, M Y - H:i') }}</td>
-                                    <td>{{ $item->updated_at->format('d, M Y - H:i') }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                        </div>												
-                                    </td>												
-                                </tr>
-                                @empty
-                                <div class="alert alert-danger">
-                                    Data Profesi belum Tersedia.
-                                </div>
-                                @endforelse
-                            </tbody>
-                        </table>
-                        {{ $profesi->links() }}
+                    {{-- <h4 class="card-title">Data Profesi</h4> --}}
+                    <div class="btn-group">
+                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#profesiModal">Tambah Data</button>
+                        <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button>
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="area_tabel">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Modal -->
+ <div class="modal fade" id="profesiModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id="profesi_modal">
+
             </div>
         </div>
     </div>
@@ -71,6 +43,113 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(window).on("load", function() { //otomatis aktif ketika page di refresh
+		reload(); //fungsi untuk load table
+	});
+
+    $(function() { //otomatis aktif ketika page di jalankan
+        //fungsi untuk load csrf token
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+
+    //fungsi untuk load tabel
+    window.reload = function() {
+        var url = "{{ route('profesi.data') }}";
+        var param = {};
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            data: param,
+            url: url,
+            beforeSend: function() {
+                $("#area_tabel").html("<div class='text-center'>Mohon Tunggu...</div>");
+            },
+            success: function(val) {
+                $("#area_tabel").html(val['data']);
+            }
+        });
+    }
+
+    //fungsi untuk load form input
+    window.input = function() {
+        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
+        var url = "{{ route('profesi.input') }}";
+        var param = {};
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            data: param,
+            url: url,
+            success: function(val) {
+                $("#profesi_modal").html(val['data']);
+            }
+        });
+    }
+
+    //fungsi untuk load form edit
+    window.edit = function(id) {
+        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
+        var url = "{{ route('profesi.edit') }}";
+        var param = {id: id};
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            data: param,
+            url: url,
+            success: function(val) {
+                $("#profesi_modal").html(val['data']);
+            }
+        });
+    }
+
+    //fungsi untuk insert atau update
+    window.formSubmit = function(id){
+        var param = $("#" + id).serialize();
+        var url = $("#" + id).attr("url");
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: param,
+            url: url,
+            success: function(val) {
+                if (val["status"] == false) {
+                    alert(val['info']);
+                }else{
+                    $("#" + id)[0].reset();
+                    alert(val['info']);
+                    reload();
+                    $("#profesiModal").modal("hide");
+                    $("body").removeClass("modal-open");
+                }
+            }
+        });
+    }
+
+    //fungsi untuk delete dengan konfirmasi
+    window.hapus = function(id){
+        if (confirm("Anda yakin?")) {
+            var url = "profesi/destroy/"+id;
+            var param = {id: id};
+            $.ajax({
+                type: "DELETE",
+                dataType: "json",
+                data: param,
+                url: url,
+                success: function(val) {
+                    if (val["status"] == true) {
+                        alert(val['info']);
+                        reload();
+                    }
+                }
+            });
+        }
+        return false;
+    }
+    </script>
 @endpush

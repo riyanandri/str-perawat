@@ -19,15 +19,14 @@ return new class extends Migration
             $table->enum('gender', ['L','P']);
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
+            $table->string('pend_terakhir');
             $table->unsignedBigInteger('profesi_id');
-            $table->unsignedBigInteger('pendidikan_id');
             $table->unsignedBigInteger('ruangan_id');
             $table->unsignedBigInteger('pk_id');
             $table->unsignedBigInteger('area_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('status_pegawai');
             $table->foreign('profesi_id')->references('id')->on('profesi');
-            $table->foreign('pendidikan_id')->references('id')->on('pendidikan_terakhir');
             $table->foreign('ruangan_id')->references('id')->on('ruangan');
             $table->foreign('pk_id')->references('id')->on('jenis_pk');
             $table->foreign('area_id')->references('id')->on('area');
