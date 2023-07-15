@@ -12,7 +12,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('profesi.index') }}">Profesi</a></li>
-                    <li><a href="uc-nestable.html">Status Pegawai</a></li>
+                    <li><a href="{{ route('status-pegawai.index') }}">Status Pegawai</a></li>
                     <li><a href="uc-noui-slider.html">Ruangan</a></li>
                     <li><a href="uc-sweetalert.html">Pendidikan</a></li>
                     <li><a href="uc-toastr.html">Jenis PK</a></li>

@@ -1,11 +1,11 @@
 @extends('layouts.template')
 
 @section('title')
-    Profesi - STR Perawat
+    Status Pegawai - STR Perawat
 @endsection
 
 @section('header')
-    Profesi
+    Status Pegawai
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                 <div class="card-header">
                     {{-- <h4 class="card-title">Data Profesi</h4> --}}
                     <div class="btn-group">
-                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#profesiModal">Tambah Data</button>
+                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#statusPegawaiModal">Tambah Data</button>
                         <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button>
                     </div>
                 </div>
@@ -31,10 +31,10 @@
     </div>
 </div>
  <!-- Modal -->
- <div class="modal fade" id="profesiModal">
+ <div class="modal fade" id="statusPegawaiModal">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div id="profesi_modal">
+            <div id="status_pegawai_modal">
 
             </div>
         </div>
@@ -60,7 +60,7 @@
 
     //fungsi untuk load tabel
     window.reload = function() {
-        var url = "{{ route('profesi.data') }}";
+        var url = "{{ route('status-pegawai.data') }}";
         var param = {};
         $.ajax({
             type: "GET",
@@ -78,8 +78,8 @@
 
     //fungsi untuk load form input
     window.input = function() {
-        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
-        var url = "{{ route('profesi.input') }}";
+        $("#statusPegawaiModal").modal({backdrop: 'static',keyboard: false});
+        var url = "{{ route('status-pegawai.input') }}";
         var param = {};
         $.ajax({
             type: "GET",
@@ -87,15 +87,15 @@
             data: param,
             url: url,
             success: function(val) {
-                $("#profesi_modal").html(val['data']);
+                $("#status_pegawai_modal").html(val['data']);
             }
         });
     }
 
     //fungsi untuk load form edit
     window.edit = function(id) {
-        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
-        var url = "{{ route('profesi.edit') }}";
+        $("#statusPegawaiModal").modal({backdrop: 'static',keyboard: false});
+        var url = "{{ route('status-pegawai.edit') }}";
         var param = {id: id};
         $.ajax({
             type: "GET",
@@ -103,7 +103,7 @@
             data: param,
             url: url,
             success: function(val) {
-                $("#profesi_modal").html(val['data']);
+                $("#status_pegawai_modal").html(val['data']);
             }
         });
     }
@@ -124,7 +124,7 @@
                     $("#" + id)[0].reset();
                     alert(val['info']);
                     reload();
-                    $("#profesiModal").modal("hide");
+                    $("#statusPegawaiModal").modal("hide");
                     $("body").removeClass("modal-open");
                 }
             }
@@ -134,7 +134,7 @@
     //fungsi untuk delete dengan konfirmasi
     window.hapus = function(id){
         if (confirm("Anda yakin ingin menghapus?")) {
-            var url = "profesi/destroy/"+id;
+            var url = "status-pegawai/destroy/"+id;
             var param = {id: id};
             $.ajax({
                 type: "DELETE",
