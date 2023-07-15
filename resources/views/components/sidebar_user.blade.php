@@ -31,7 +31,7 @@
                 <li><a href="#">SPKK</a></li>
             </ul>
         </li>
-            <li><a href="{{ route('account') }}" class="" aria-expanded="false">
+            <li><a href="#" class="" aria-expanded="false">
                     <i class="fas fa-user-check"></i>
                     <span class="nav-text">Akun</span>
                 </a>

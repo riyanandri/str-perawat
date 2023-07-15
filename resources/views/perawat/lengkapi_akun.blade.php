@@ -1,11 +1,11 @@
 @extends('layouts.user')
 
 @section('title')
-    Akun
+    Detail Akun
 @endsection
 
 @section('header')
-    Detail Akun
+    Lengkapi data akun
 @endsection
 
 @push('css')
@@ -21,72 +21,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-4 order-lg-2 mb-4">
-                            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-muted">Upload foto disini</span>
-                            </h4>
-                            <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Product name</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$12</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Second product</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$8</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Third item</h6>
-                                        <small class="text-muted">Brief description</small>
-                                    </div>
-                                    <span class="text-muted">$5</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between active">
-                                    <div class="text-white">
-                                        <h6 class="my-0 text-white">Promo code</h6>
-                                        <small>EXAMPLECODE</small>
-                                    </div>
-                                    <span class="text-white">-$5</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <span>Total (USD)</span>
-                                    <strong>$20</strong>
-                                </li>
-                            </ul>
-
-                            {{-- <form>
-                                <div class="input-group">
-                                    <div class="form-file">
-                                        <input type="file" class="form-file-input form-control">
-                                    </div>
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Promo code">
-                                    <button type="submit" class="input-group-text">Redeem</button>
-                                </div>
-                            </form> --}}
-                        </div>
-                        <div class="col-lg-8 order-lg-1">
-                            <h4 class="mb-3">Pengaturan Akun</h4>
-                            <form action="{{ route('account.simpan') }}" method="POST" enctype="multipart/form-data">
+                        <div class="col-lg-12">
+                            <h4 class="mb-3">Data Akun</h4>
+                            <form action="{{ route('complete-account.save') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" value="{{ Auth::user()->nama }}">
+                                        <input type="text" class="form-control" id="nama" name="nama" value="{{ Auth::user()->nama }}" disabled>
                                       
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="whatsapp" class="form-label">No WhatsApp</label>
-                                        <input type="number" class="form-control" id="whatsapp" name="whatsapp" value="{{ Auth::user()->whatsapp }}">
+                                        <input type="number" class="form-control" id="whatsapp" name="whatsapp" value="{{ Auth::user()->whatsapp }}" disabled>
                                        
                                     </div>
                                 </div>
@@ -195,7 +143,7 @@
                                     </div>
                                 </div>
                                 <hr class="mb-4">
-                                <button class="btn btn-lg btn-primary" type="submit">Simpan Perubahan</button>
+                                <button class="btn btn-sm btn-primary" type="submit">Simpan</button>
                             </form>
                         </div>
                     </div>
@@ -212,4 +160,5 @@
 <script src="{{ asset('assets/vendor/pickadate/picker.js') }}"></script>
 <script src="{{ asset('assets/vendor/pickadate/picker.date.js') }}"></script>
 <script src="{{ asset('assets/js/plugins-init/material-date-picker-init.js') }}"></script>
+<script src="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 @endpush

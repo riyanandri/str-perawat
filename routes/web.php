@@ -28,9 +28,9 @@ Auth::routes();
 Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'perawatDashboard'])->name('dashboard');
 
-    // akun
-    Route::get('/account', [PegawaiController::class, 'updateAkun'])->name('account');
-    Route::post('/account', [PegawaiController::class, 'simpan'])->name('account.simpan');
+    // lengkapi akun
+    Route::get('/complete-account', [PegawaiController::class, 'completeAccount'])->name('complete-account');
+    Route::post('/complete-account', [PegawaiController::class, 'save'])->name('complete-account.save');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
