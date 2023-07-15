@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_str');
             $table->date('berlaku_str');
             $table->text('ket_str');
+            $table->enum('status', ['pending','diterima','ditolak'])->default('pending');
             $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });

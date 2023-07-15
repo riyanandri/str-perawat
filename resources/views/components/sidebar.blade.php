@@ -20,7 +20,7 @@
             </li>
             <li><a href="widget-basic.html" class="" aria-expanded="false">
                     <i class="fas fa-user-check"></i>
-                    <span class="nav-text">Widget</span>
+                    <span class="nav-text">Data Pegawai</span>
                 </a>
             </li>
         </ul>

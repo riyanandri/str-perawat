@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_sipp');
             $table->date('berlaku_sipp');
             $table->text('ket_sipp');
+            $table->enum('status', ['pending','diterima','ditolak'])->default('pending');
             $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });

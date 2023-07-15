@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('whatsapp', 15);
+            $table->string('photo')->nullable();
             $table->tinyInteger('type')->default(0); // 0 = perawat, 1 = admin, 2 = superadmin
             $table->rememberToken();
             $table->timestamps();
