@@ -16,24 +16,38 @@ class JenisPkSeeder extends Seeder
         $jenis_pk = [
             [
                 'nama_pk' => 'PK 1',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'PK 2',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'PK 3',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'PK 4',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'PK 5',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'PK 1 Pendampingan',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_pk' => 'Pra PK',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

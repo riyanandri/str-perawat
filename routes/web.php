@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ProfesiController;
 use App\Http\Controllers\Admin\StatusPegawaiController;
+use App\Http\Controllers\Admin\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,16 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     Route::get('/status-pegawai/edit', [StatusPegawaiController::class, 'edit'])->name('status-pegawai.edit');
     Route::post('/status-pegawai/update', [StatusPegawaiController::class, 'update'])->name('status-pegawai.update');
     Route::delete('/status-pegawai/destroy/{id}', [StatusPegawaiController::class, 'destroy'])->name('status-pegawai.destroy');
+
+    // ruangan
+    Route::post('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+    Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+    Route::get('/ruangan/data', [RuanganController::class, 'data'])->name('ruangan.data');
+    Route::get('/ruangan/input', [RuanganController::class, 'input'])->name('ruangan.input');
+    Route::post('/ruangan/create', [RuanganController::class, 'create'])->name('ruangan.create');
+    Route::get('/ruangan/edit', [RuanganController::class, 'edit'])->name('ruangan.edit');
+    Route::post('/ruangan/update', [RuanganController::class, 'update'])->name('ruangan.update');
+    Route::delete('/ruangan/destroy/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
 });
 
 Route::middleware(['auth', 'user-access:superadmin'])->group(function () {

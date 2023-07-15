@@ -16,12 +16,18 @@ class ProfesiSeeder extends Seeder
         $profesi = [
             [
                 'nama_profesi' => 'Perawat',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_profesi' => 'Bidan',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_profesi' => 'Perawat Gigi',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

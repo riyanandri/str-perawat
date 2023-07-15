@@ -16,9 +16,13 @@ class StatusPegawaiSeeder extends Seeder
         $status = [
             [
                 'nama_status' => 'PNS',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'nama_status' => 'Honorer',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

@@ -13,8 +13,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('profesi.index') }}">Profesi</a></li>
                     <li><a href="{{ route('status-pegawai.index') }}">Status Pegawai</a></li>
-                    <li><a href="uc-noui-slider.html">Ruangan</a></li>
-                    <li><a href="uc-sweetalert.html">Pendidikan</a></li>
+                    <li><a href="{{ route('ruangan.index') }}">Ruangan</a></li>
                     <li><a href="uc-toastr.html">Jenis PK</a></li>
                     <li><a href="map-jqvmap.html">Area</a></li>
                 </ul>
@@ -28,7 +27,6 @@
         
         <div class="copyright">
             <p><strong>STR Perawat</strong> © 2023 All Rights Reserved</p>
-            {{-- <p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p> --}}
         </div>
     </div>
 </div>
