@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'whatsapp',
+        'photo',
         'type'
     ];
 
@@ -66,5 +68,10 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])->diffForHumans();
+    }
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'user_id', 'id');
     }
 }

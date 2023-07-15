@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
             $table->string('pend_terakhir');
+            $table->text('alamat');
             $table->unsignedBigInteger('profesi_id');
             $table->unsignedBigInteger('ruangan_id');
             $table->unsignedBigInteger('pk_id');

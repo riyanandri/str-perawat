@@ -13,4 +13,9 @@ class JenisPk extends Model
     protected $fillable = [
         'nama_pk',
     ];
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'pk_id', 'id');
+    }
 }

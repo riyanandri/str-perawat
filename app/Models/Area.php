@@ -13,4 +13,9 @@ class Area extends Model
     protected $fillable = [
         'nama_area',
     ];
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'area_id', 'id');
+    }
 }

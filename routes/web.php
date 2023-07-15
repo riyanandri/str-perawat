@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ProfesiController;
 use App\Http\Controllers\Admin\StatusPegawaiController;
 use App\Http\Controllers\Admin\RuanganController;
+use App\Http\Controllers\Perawat\PegawaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,10 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'perawatDashboard'])->name('dashboard');
+
+    // akun
+    Route::get('/account', [PegawaiController::class, 'updateAkun'])->name('account');
+    Route::post('/account', [PegawaiController::class, 'simpan'])->name('account.simpan');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
