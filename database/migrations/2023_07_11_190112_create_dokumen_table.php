@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('dokumen', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['berlaku','kadaluarsa']);
+            $table->unsignedBigInteger('pegawai_id');
+            $table->string('url');
+            $table->enum('status', ['berlaku','kadaluarsa'])->default('berlaku');
             $table->enum('jenis', ['sipp','str','spkk']);
-            $table->string('nama_dokumen');
+            $table->date('berlaku_sd');
+            $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });
     }

@@ -27,6 +27,6 @@ class StatusPegawai extends Model
 
     public function pegawai()
     {
-        return $this->hasOne(Pegawai::class, 'status_id', 'id');
+        return $this->hasMany(Pegawai::class);
     }
 }

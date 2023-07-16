@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                <i class="fas fa-heart"></i>
+                <i class="fas fa-upload"></i>
                 <span class="nav-text">Upload Dokumen</span>
             </a>
             <ul aria-expanded="false">
@@ -30,11 +30,20 @@
                 <li><a href="">SIPP</a></li>
                 <li><a href="#">SPKK</a></li>
             </ul>
-        </li>
+            </li>
             <li><a href="#" class="" aria-expanded="false">
-                    <i class="fas fa-user-check"></i>
-                    <span class="nav-text">Akun</span>
+                    <i class="fas fa-file"></i>
+                    <span class="nav-text">Dokumen</span>
                 </a>
+            </li>
+            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                <i class="fas fa-user"></i>
+                <span class="nav-text">Pengaturan Akun</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="#">Update Akun</a></li>
+                <li><a href="">Detail Akun</a></li>
+            </ul>
             </li>
         </ul>
     </div>

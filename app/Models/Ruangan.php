@@ -27,6 +27,6 @@ class Ruangan extends Model
 
     public function pegawai()
     {
-        return $this->hasOne(Pegawai::class, 'ruangan_id', 'id');
+        return $this->hasMany(Pegawai::class);
     }
 }

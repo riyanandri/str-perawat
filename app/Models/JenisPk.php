@@ -16,6 +16,6 @@ class JenisPk extends Model
 
     public function pegawai()
     {
-        return $this->hasOne(Pegawai::class, 'pk_id', 'id');
+        return $this->hasMany(Pegawai::class);
     }
 }

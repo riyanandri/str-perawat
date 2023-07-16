@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('detail_str', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pegawai_id');
+            $table->unsignedBigInteger('dok_id');
             $table->string('no_str');
             $table->date('berlaku_str');
             $table->text('ket_str');
-            $table->enum('status', ['pending','diterima','ditolak'])->default('pending');
-            $table->foreign('pegawai_id')->references('id')->on('pegawai');
+            $table->enum('status', ['pending','ditolak','diterima'])->default('pending');
+            $table->foreign('dok_id')->references('id')->on('dokumen');
             $table->timestamps();
         });
     }

@@ -28,31 +28,31 @@ class Pegawai extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function statusPegawai()
     {
-        return $this->belongsTo(StatusPegawai::class, 'status_id', 'id');
+        return $this->belongsTo(StatusPegawai::class);
     }
 
     public function profesi()
     {
-        return $this->belongsTo(Profesi::class, 'profesi_id', 'id');
+        return $this->belongsTo(Profesi::class);
     }
 
     public function ruangan()
     {
-        return $this->belongsTo(Ruangan::class, 'ruangan_id', 'id');
+        return $this->belongsTo(Ruangan::class);
     }
 
     public function jenisPk()
     {
-        return $this->belongsTo(JenisPk::class, 'pk_id', 'id');
+        return $this->belongsTo(JenisPk::class);
     }
 
     public function area()
     {
-        return $this->belongsTo(Area::class, 'area_id', 'id');
+        return $this->belongsTo(Area::class);
     }
 }

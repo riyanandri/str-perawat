@@ -16,6 +16,6 @@ class Area extends Model
 
     public function pegawai()
     {
-        return $this->hasOne(Pegawai::class, 'area_id', 'id');
+        return $this->hasMany(Pegawai::class);
     }
 }
