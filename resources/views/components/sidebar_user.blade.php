@@ -26,7 +26,7 @@
                 <span class="nav-text">Upload Dokumen</span>
             </a>
             <ul aria-expanded="false">
-                <li><a href="#">STR</a></li>
+                <li><a href="{{ route('dokumen.upload') }}">STR</a></li>
                 <li><a href="">SIPP</a></li>
                 <li><a href="#">SPKK</a></li>
             </ul>

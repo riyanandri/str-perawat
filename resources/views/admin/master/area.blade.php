@@ -1,11 +1,11 @@
 @extends('layouts.template')
 
 @section('title')
-    Profesi - STR Perawat
+    Area - STR Perawat
 @endsection
 
 @section('header')
-    Profesi
+    Area
 @endsection
 
 @push('css')
@@ -22,7 +22,7 @@
                 <div class="card-header">
                     {{-- <h4 class="card-title">Data Profesi</h4> --}}
                     <div class="btn-group">
-                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#profesiModal">Tambah Data</button>
+                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#jenisPkModal">Tambah Data</button>
                         <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
     </div>
 </div>
  <!-- Modal -->
- <div class="modal fade" id="profesiModal">
+ <div class="modal fade" id="jenisPkModal">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div id="profesi_modal">
+            <div id="jenis_pk_modal">
 
             </div>
         </div>
@@ -67,7 +67,7 @@
 
     //fungsi untuk load tabel
     window.reload = function() {
-        var url = "{{ route('profesi.data') }}";
+        var url = "{{ route('area.data') }}";
         var param = {};
         $.ajax({
             type: "GET",
@@ -85,7 +85,7 @@
 
     //fungsi untuk load form input
     window.input = function() {
-        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
+        $("#jenisPkModal").modal({backdrop: 'static',keyboard: false});
         var url = "{{ route('profesi.input') }}";
         var param = {};
         $.ajax({
@@ -94,14 +94,14 @@
             data: param,
             url: url,
             success: function(val) {
-                $("#profesi_modal").html(val['data']);
+                $("#jenis_pk_modal").html(val['data']);
             }
         });
     }
 
     //fungsi untuk load form edit
     window.edit = function(id) {
-        $("#profesiModal").modal({backdrop: 'static',keyboard: false});
+        $("#jenisPkModal").modal({backdrop: 'static',keyboard: false});
         var url = "{{ route('profesi.edit') }}";
         var param = {id: id};
         $.ajax({
@@ -110,7 +110,7 @@
             data: param,
             url: url,
             success: function(val) {
-                $("#profesi_modal").html(val['data']);
+                $("#jenis_pk_modal").html(val['data']);
             }
         });
     }
@@ -133,7 +133,7 @@
                     // alert(val['info']);
                     toastr.success(val['info']);
                     reload();
-                    $("#profesiModal").modal("hide");
+                    $("#jenisPkModal").modal("hide");
                     $("body").removeClass("modal-open");
                 }
             }

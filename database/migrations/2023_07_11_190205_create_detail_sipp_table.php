@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('dok_id');
             $table->string('no_sipp');
-            $table->date('berlaku_sipp');
+            $table->date('berlaku_sd');
             $table->text('ket_sipp');
             $table->enum('status', ['pending','ditolak','diterima'])->default('pending');
             $table->foreign('dok_id')->references('id')->on('dokumen');

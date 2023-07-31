@@ -5,7 +5,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ProfesiController;
 use App\Http\Controllers\Admin\StatusPegawaiController;
 use App\Http\Controllers\Admin\RuanganController;
+use App\Http\Controllers\Admin\JenisPkController;
+use App\Http\Controllers\Admin\AreaController;
+use App\Http\Controllers\Admin\DataDokumenController;
 use App\Http\Controllers\Perawat\PegawaiController;
+use App\Http\Controllers\Perawat\DokumenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +35,9 @@ Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     // lengkapi akun
     Route::get('/complete-account', [PegawaiController::class, 'completeAccount'])->name('complete-account');
     Route::post('/complete-account', [PegawaiController::class, 'save'])->name('complete-account.save');
+
+    // dokumen
+    Route::get('/upload-dokumen', [DokumenController::class, 'upload'])->name('dokumen.upload');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
@@ -65,6 +72,19 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     Route::get('/ruangan/edit', [RuanganController::class, 'edit'])->name('ruangan.edit');
     Route::post('/ruangan/update', [RuanganController::class, 'update'])->name('ruangan.update');
     Route::delete('/ruangan/destroy/{id}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
+
+    // jenis pk
+    Route::post('/jenis-pk', [JenisPkController::class, 'index'])->name('jenisPk.index');
+    Route::get('/jenis-pk', [JenisPkController::class, 'index'])->name('jenisPk.index');
+    Route::get('/jenis-pk/data', [JenisPkController::class, 'data'])->name('jenisPk.data');
+
+    // area
+    Route::post('/area', [AreaController::class, 'index'])->name('area.index');
+    Route::get('/area', [AreaController::class, 'index'])->name('area.index');
+    Route::get('/area/data', [AreaController::class, 'data'])->name('area.data');
+
+    // dokumen
+    Route::get('/dokumen/str', [DataDokumenController::class, 'str'])->name('dokumen.str');
 });
 
 Route::middleware(['auth', 'user-access:superadmin'])->group(function () {

@@ -36,6 +36,22 @@ class PegawaiController extends Controller
 
     public function save(Request $request)
     {
+        $request->validate([
+            'nip' => 'required|regex:/^\S*$/u|unique:pegawai,nip',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'pend_terakhir' => 'required',
+            'alamat' => 'required',
+        ],[
+            'nip.required' => 'Anda belum mengisi NIP',
+            'nip.regex' => 'NIP tidak boleh ada spasi',
+            'nip.unique' => 'NIP tersebut sudah terdaftar',
+            'tempat_lahir' => 'Anda belum mengisi tempat lahir',
+            'tgl_lahir' => 'Anda belum mengisi tanggal lahir',
+            'pend_terakhir' => 'Anda belum mengisi pendidikan terakhir',
+            'alamat' => 'Anda belum mengisi alamat',
+        ]);
+
         $pegawai = new Pegawai;
 
         $pegawai->nip = $request->input('nip');

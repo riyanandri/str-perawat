@@ -6,7 +6,7 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <li><a class="has-arrow active" href="javascript:void()" aria-expanded="false">
                     <i class="fas fa-folder"></i>
                     <span class="nav-text">Data Master</span>
                 </a>
@@ -14,8 +14,8 @@
                     <li><a href="{{ route('profesi.index') }}">Profesi</a></li>
                     <li><a href="{{ route('status-pegawai.index') }}">Status Pegawai</a></li>
                     <li><a href="{{ route('ruangan.index') }}">Ruangan</a></li>
-                    <li><a href="#">Jenis PK</a></li>
-                    <li><a href="#">Area</a></li>
+                    <li><a href="{{ route('jenisPk.index') }}">Jenis PK</a></li>
+                    <li><a href="{{ route('area.index') }}">Area</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -23,11 +23,9 @@
                 <span class="nav-text">Data Dokumen</span>
             </a>
             <ul aria-expanded="false">
-                <li><a href="{{ route('profesi.index') }}">Profesi</a></li>
-                <li><a href="{{ route('status-pegawai.index') }}">Status Pegawai</a></li>
-                <li><a href="{{ route('ruangan.index') }}">Ruangan</a></li>
-                <li><a href="#">Jenis PK</a></li>
-                <li><a href="#">Area</a></li>
+                <li><a href="{{ route('dokumen.str') }}">STR</a></li>
+                <li><a href="{{ route('status-pegawai.index') }}">SIPP</a></li>
+                <li><a href="{{ route('ruangan.index') }}">SPKK</a></li>
             </ul>
             </li>
             <li><a href="widget-basic.html" class="" aria-expanded="false">

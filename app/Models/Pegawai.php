@@ -55,4 +55,9 @@ class Pegawai extends Model
     {
         return $this->belongsTo(Area::class);
     }
+
+    public function dokumen()
+    {
+        return $this->hasMany(Dokumen::class);
+    }
 }

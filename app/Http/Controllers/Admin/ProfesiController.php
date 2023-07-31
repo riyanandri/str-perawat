@@ -39,7 +39,7 @@ class ProfesiController extends Controller
         if($cek) {
             return response()->json([ //respon json jika gagal
                 'status' => false,
-                'info' => "Data sudah ada di database"
+                'info' => "Nama profesi tersebut sudah ada di database"
             ], 201);
             return false;
         }
@@ -47,7 +47,7 @@ class ProfesiController extends Controller
         $post = Profesi::create($inputclear); //jika lolos pengecekan id maka query insert ini jalan 
         return response()->json([ //respon json jika berhasil
             'status' => true,
-            'info' => 'Berhasil menambahkan data'
+            'info' => 'Berhasil menambahkan data profesi'
         ], 201);
     }
 

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('url');
             $table->enum('status', ['berlaku','kadaluarsa'])->default('berlaku');
             $table->enum('jenis', ['sipp','str','spkk']);
-            $table->date('berlaku_sd');
             $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });
