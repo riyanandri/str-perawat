@@ -9,147 +9,161 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-    <!-- row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    {{-- <h4 class="card-title">Data Profesi</h4> --}}
-                    <div class="btn-group">
-                        <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#statusPegawaiModal">Tambah Data</button>
-                        <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button>
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Data Status Kepegawaian</h4>
+                        <div class="btn-group">
+                            <button type="button" onclick="input()" class="btn btn-rounded btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#statusPegawaiModal"><span class="btn-icon-start text-primary"><i
+                                        class="fa fa-plus color-primary"></i>
+                                </span>Tambah data</button>
+                            {{-- <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button> --}}
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive" id="area_tabel">
-                    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
- <!-- Modal -->
- <div class="modal fade" id="statusPegawaiModal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div id="status_pegawai_modal">
+                    <div class="card-body">
+                        <div class="table-responsive" id="area_tabel">
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="statusPegawaiModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="status_pegawai_modal">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('js')
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-    $(window).on("load", function() { //otomatis aktif ketika page di refresh
-		reload(); //fungsi untuk load table
-	});
-
-    $(function() { //otomatis aktif ketika page di jalankan
-        //fungsi untuk load csrf token
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        $(window).on("load", function() { //otomatis aktif ketika page di refresh
+            reload(); //fungsi untuk load table
         });
-    });
 
-    //fungsi untuk load tabel
-    window.reload = function() {
-        var url = "{{ route('status-pegawai.data') }}";
-        var param = {};
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            data: param,
-            url: url,
-            beforeSend: function() {
-                $("#area_tabel").html("<div class='text-center'>Mohon Tunggu...</div>");
-            },
-            success: function(val) {
-                $("#area_tabel").html(val['data']);
-            }
-        });
-    }
-
-    //fungsi untuk load form input
-    window.input = function() {
-        $("#statusPegawaiModal").modal({backdrop: 'static',keyboard: false});
-        var url = "{{ route('status-pegawai.input') }}";
-        var param = {};
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            data: param,
-            url: url,
-            success: function(val) {
-                $("#status_pegawai_modal").html(val['data']);
-            }
-        });
-    }
-
-    //fungsi untuk load form edit
-    window.edit = function(id) {
-        $("#statusPegawaiModal").modal({backdrop: 'static',keyboard: false});
-        var url = "{{ route('status-pegawai.edit') }}";
-        var param = {id: id};
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            data: param,
-            url: url,
-            success: function(val) {
-                $("#status_pegawai_modal").html(val['data']);
-            }
-        });
-    }
-
-    //fungsi untuk insert atau update
-    window.formSubmit = function(id){
-        var param = $("#" + id).serialize();
-        var url = $("#" + id).attr("url");
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            data: param,
-            url: url,
-            success: function(val) {
-                if (val["status"] == false) {
-                    alert(val['info']);
-                }else{
-                    $("#" + id)[0].reset();
-                    alert(val['info']);
-                    reload();
-                    $("#statusPegawaiModal").modal("hide");
-                    $("body").removeClass("modal-open");
+        $(function() { //otomatis aktif ketika page di jalankan
+            //fungsi untuk load csrf token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
+            });
         });
-    }
 
-    //fungsi untuk delete dengan konfirmasi
-    window.hapus = function(id){
-        if (confirm("Anda yakin ingin menghapus?")) {
-            var url = "status-pegawai/destroy/"+id;
-            var param = {id: id};
+        //fungsi untuk load tabel
+        window.reload = function() {
+            var url = "{{ route('status-pegawai.data') }}";
+            var param = {};
             $.ajax({
-                type: "DELETE",
+                type: "GET",
+                dataType: "json",
+                data: param,
+                url: url,
+                beforeSend: function() {
+                    $("#area_tabel").html("<div class='text-center'>Mohon Tunggu...</div>");
+                },
+                success: function(val) {
+                    $("#area_tabel").html(val['data']);
+                }
+            });
+        }
+
+        //fungsi untuk load form input
+        window.input = function() {
+            $("#statusPegawaiModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            var url = "{{ route('status-pegawai.input') }}";
+            var param = {};
+            $.ajax({
+                type: "GET",
                 dataType: "json",
                 data: param,
                 url: url,
                 success: function(val) {
-                    if (val["status"] == true) {
+                    $("#status_pegawai_modal").html(val['data']);
+                }
+            });
+        }
+
+        //fungsi untuk load form edit
+        window.edit = function(id) {
+            $("#statusPegawaiModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            var url = "{{ route('status-pegawai.edit') }}";
+            var param = {
+                id: id
+            };
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                data: param,
+                url: url,
+                success: function(val) {
+                    $("#status_pegawai_modal").html(val['data']);
+                }
+            });
+        }
+
+        //fungsi untuk insert atau update
+        window.formSubmit = function(id) {
+            var param = $("#" + id).serialize();
+            var url = $("#" + id).attr("url");
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: param,
+                url: url,
+                success: function(val) {
+                    if (val["status"] == false) {
+                        alert(val['info']);
+                    } else {
+                        $("#" + id)[0].reset();
                         alert(val['info']);
                         reload();
+                        $("#statusPegawaiModal").modal("hide");
+                        $("body").removeClass("modal-open");
                     }
                 }
             });
         }
-        return false;
-    }
+
+        //fungsi untuk delete dengan konfirmasi
+        window.hapus = function(id) {
+            if (confirm("Anda yakin ingin menghapus?")) {
+                var url = "status-pegawai/destroy/" + id;
+                var param = {
+                    id: id
+                };
+                $.ajax({
+                    type: "DELETE",
+                    dataType: "json",
+                    data: param,
+                    url: url,
+                    success: function(val) {
+                        if (val["status"] == true) {
+                            alert(val['info']);
+                            reload();
+                        }
+                    }
+                });
+            }
+            return false;
+        }
     </script>
 @endpush

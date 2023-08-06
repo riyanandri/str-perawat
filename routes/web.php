@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\DataDokumenController;
 use App\Http\Controllers\Perawat\PegawaiController;
 use App\Http\Controllers\Perawat\DokumenController;
+use App\Http\Controllers\Perawat\StrController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,14 @@ Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     Route::get('/complete-account', [PegawaiController::class, 'completeAccount'])->name('complete-account');
     Route::post('/complete-account', [PegawaiController::class, 'save'])->name('complete-account.save');
 
-    // dokumen
-    Route::get('/upload-dokumen', [DokumenController::class, 'upload'])->name('dokumen.upload');
+    // str
+    Route::get('/str', [StrController::class, 'index'])->name('str.index');
+    Route::get('/str/upload', [StrController::class, 'create'])->name('str.create');
+    Route::post('/str', [StrController::class, 'store'])->name('str.store');
+    Route::get('/str/edit', [StrController::class, 'edit'])->name('str.edit');
+    Route::post('/str/update', [StrController::class, 'update'])->name('str.update');
+    Route::delete('/str/destroy/{id}', [StrController::class, 'destroy'])->name('str.destroy');
+    // Route::get('/upload-dokumen', [DokumenController::class, 'upload'])->name('dokumen.upload');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {

@@ -17,19 +17,19 @@
 
             </li> --}}
             <li><a href="{{ route('dashboard') }}" class="" aria-expanded="false">
-                <i class="fas fa-home"></i>
-                <span class="nav-text">Dashboard</span>
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">Dashboard</span>
                 </a>
             </li>
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                <i class="fas fa-upload"></i>
-                <span class="nav-text">Upload Dokumen</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="{{ route('dokumen.upload') }}">STR</a></li>
-                <li><a href="">SIPP</a></li>
-                <li><a href="#">SPKK</a></li>
-            </ul>
+                    <i class="fas fa-upload"></i>
+                    <span class="nav-text">Upload Dokumen</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('str.index') }}">STR</a></li>
+                    <li><a href="">SIPP</a></li>
+                    <li><a href="#">SPKK</a></li>
+                </ul>
             </li>
             <li><a href="#" class="" aria-expanded="false">
                     <i class="fas fa-file"></i>
@@ -37,13 +37,13 @@
                 </a>
             </li>
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                <i class="fas fa-user"></i>
-                <span class="nav-text">Pengaturan Akun</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="#">Update Akun</a></li>
-                <li><a href="">Detail Akun</a></li>
-            </ul>
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">Pengaturan Akun</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="#">Update Akun</a></li>
+                    <li><a href="">Detail Akun</a></li>
+                </ul>
             </li>
         </ul>
     </div>
