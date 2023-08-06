@@ -31,7 +31,7 @@ class ProfesiController extends Controller
     public function create(Request $request)
     {
         $postall = $request->all(); //tangkap semua parameter yang di post
-        $inputclear = \Arr::except($request->all(), array('_token', '_method')); //pisahkan parameter token 
+        $inputclear = \Arr::except($postall, array('_token', '_method')); //pisahkan parameter token 
 
         $nama_profesi = $request->input('nama_profesi'); //tangkap parameter id yang di post
 
@@ -66,7 +66,7 @@ class ProfesiController extends Controller
     public function update(Request $request)
     {
         $postall = $request->all(); //tangkap semua parameter yang di post
-        $inputclear = \Arr::except($request->all(), array('_token', '_method')); //pisahkan parameter token 
+        $inputclear = \Arr::except($postall, array('_token', '_method')); //pisahkan parameter token 
         $id = $request->input('id'); //tangkap parameter id yang di post
         $nama = $request->input('nama_profesi'); //tangkap parameter nama profesi yang di post
 

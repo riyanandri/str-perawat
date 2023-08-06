@@ -8,6 +8,11 @@
     Status Pegawai
 @endsection
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/css/toastr.min.css') }}">
+    <link href="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="container-fluid">
         <!-- row -->
@@ -17,9 +22,9 @@
                     <div class="card-header">
                         <h4 class="card-title">Data Status Kepegawaian</h4>
                         <div class="btn-group">
-                            <button type="button" onclick="input()" class="btn btn-rounded btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#statusPegawaiModal"><span class="btn-icon-start text-primary"><i
-                                        class="fa fa-plus color-primary"></i>
+                            <button type="button" onclick="input()" class="btn btn-rounded btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#statusPegawaiModal"><span
+                                    class="btn-icon-start text-primary"><i class="fa fa-plus color-primary"></i>
                                 </span>Tambah data</button>
                             {{-- <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button> --}}
                         </div>
@@ -48,6 +53,8 @@
 @push('js')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/vendor/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script type="text/javascript">
         $(window).on("load", function() { //otomatis aktif ketika page di refresh
             reload(); //fungsi untuk load table
@@ -131,10 +138,12 @@
                 url: url,
                 success: function(val) {
                     if (val["status"] == false) {
-                        alert(val['info']);
+                        // alert(val['info']);
+                        toastr.info(val['info']);
                     } else {
                         $("#" + id)[0].reset();
-                        alert(val['info']);
+                        // alert(val['info']);
+                        toastr.success(val['info']);
                         reload();
                         $("#statusPegawaiModal").modal("hide");
                         $("body").removeClass("modal-open");
@@ -145,24 +154,41 @@
 
         //fungsi untuk delete dengan konfirmasi
         window.hapus = function(id) {
-            if (confirm("Anda yakin ingin menghapus?")) {
-                var url = "status-pegawai/destroy/" + id;
-                var param = {
-                    id: id
-                };
-                $.ajax({
-                    type: "DELETE",
-                    dataType: "json",
-                    data: param,
-                    url: url,
-                    success: function(val) {
-                        if (val["status"] == true) {
-                            alert(val['info']);
-                            reload();
+            swal({
+                title: "Yakin ingin menghapus?",
+                text: "Data yang telah dihapus tidak dapat dikembalikan!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: !1
+            }).then(function(e) {
+                if (e.value == true) {
+                    var url = "status-pegawai/destroy/" + id;
+                    var param = {
+                        id: id
+                    };
+                    $.ajax({
+                        type: "DELETE",
+                        dataType: "json",
+                        data: param,
+                        url: url,
+                        success: function(val) {
+                            if (val["status"] == true) {
+                                // alert(val['info']);
+                                swal({
+                                    title: "Berhasil",
+                                    text: "Data telah berhasil dihapus",
+                                    type: "success",
+                                    confirmButtonColor: "#DD6B55"
+                                })
+                                reload();
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            })
             return false;
         }
     </script>

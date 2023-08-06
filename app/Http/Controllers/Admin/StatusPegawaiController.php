@@ -31,7 +31,7 @@ class StatusPegawaiController extends Controller
     public function create(Request $request)
     {
         $postall = $request->all(); //tangkap semua parameter yang di post
-        $inputclear = \Arr::except($request->all(), array('_token', '_method')); //pisahkan parameter token 
+        $inputclear = \Arr::except($postall, array('_token', '_method')); //pisahkan parameter token 
 
         $nama_status = $request->input('nama_status'); //tangkap parameter id yang di post
 
@@ -39,7 +39,7 @@ class StatusPegawaiController extends Controller
         if($cek) {
             return response()->json([ //respon json jika gagal
                 'status' => false,
-                'info' => "Data sudah ada di database"
+                'info' => "Status pegawai tersebut sudah ada di database"
             ], 201);
             return false;
         }
@@ -66,7 +66,7 @@ class StatusPegawaiController extends Controller
     public function update(Request $request)
     {
         $postall = $request->all(); //tangkap semua parameter yang di post
-        $inputclear = \Arr::except($request->all(), array('_token', '_method')); //pisahkan parameter token 
+        $inputclear = \Arr::except($postall, array('_token', '_method')); //pisahkan parameter token 
         $id = $request->input('id'); //tangkap parameter id yang di post
         $nama = $request->input('nama_status'); //tangkap parameter nama profesi yang di post
 
@@ -79,7 +79,7 @@ class StatusPegawaiController extends Controller
         if($cek) {
             return response()->json([ //respon json jika gagal
                 'status' => false,
-                'info' => "Nama status pegawai tersebut sudah ada di database"
+                'info' => "Status pegawai tersebut sudah ada di database"
             ], 201);
             return false;
         }
