@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('no_str');
             $table->date('berlaku_sd');
             $table->text('ket_str');
-            $table->enum('status', ['pending','ditolak','diterima'])->default('pending');
+            $table->enum('status_upload', ['pending','ditolak','diterima'])->default('pending');
             $table->foreign('dok_id')->references('id')->on('dokumen');
             $table->timestamps();
         });

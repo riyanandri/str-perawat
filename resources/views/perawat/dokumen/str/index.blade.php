@@ -20,11 +20,14 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        {{-- <div class="btn-group">
-                            <button type="button" onclick="input()" class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#strModal">Upload Dokumen</button>
-                            <button type="button" onclick="reload()" class="btn btn-sm btn-light">Refresh</button>
-                        </div> --}}
+                        <h4 class="card-title">Data STR</h4>
+                        <div class="btn-group">
+                            <a href="{{ route('str.create') }}">
+                                <button type="button" class="btn btn-rounded btn-primary"><span
+                                        class="btn-icon-start text-primary"><i class="fa fa-plus color-primary"></i>
+                                    </span>Tambah data</button>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -37,6 +40,7 @@
                                         <th class="align-middle">Dokumen</th>
                                         <th class="align-middle pe-7">Berlaku Sd</th>
                                         <th class="align-middle" style="min-width: 12.5rem;">Keterangan</th>
+                                        <th class="align-middle text-end">Status Dokumen</th>
                                         <th class="align-middle text-end">Status Upload</th>
                                         <th class="no-sort"></th>
                                     </tr>
@@ -55,43 +59,41 @@
                                             <td class="py-2">
                                                 {{ $item->ket_str }}
                                             </td>
-                                            <td class="py-2 text-end"><span
-                                                    class="badge badge-success">{{ $item->status }}<span
-                                                        class="ms-1 fa fa-check"></span></span>
-                                            </td>
+                                            @if ($item->status_dokumen == 'berlaku')
+                                                <td class="py-2 text-center"><span class="badge badge-success">Berlaku<span
+                                                            class="ms-1 fa fa-check"></span></span>
+                                                </td>
+                                            @else
+                                                <td class="py-2 text-end"><span class="badge badge-danger">On
+                                                        Hold<span class="ms-1 fa fa-ban"></span></span>
+                                                </td>
+                                            @endif
+                                            @if ($item->status_upload == 'pending')
+                                                <td>
+                                                    <div class="py-2 text-center"><i
+                                                            class="fa fa-circle text-warning me-1"></i>
+                                                        Pending</div>
+                                                </td>
+                                            @elseif ($item->status_upload == 'ditolak')
+                                                <td>
+                                                    <div class="py-2 text-center"><i
+                                                            class="fa fa-circle text-danger me-1"></i>
+                                                        Ditolak</div>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <div class="py-2 text-center"><i
+                                                            class="fa fa-circle text-success me-1"></i>
+                                                        Diterima</div>
+                                                </td>
+                                            @endif
                                             <td class="py-2 text-end">
-                                                <div class="dropdown text-sans-serif"><button
-                                                        class="btn btn-primary tp-btn-light sharp" type="button"
-                                                        id="order-dropdown-0" data-bs-toggle="dropdown"
-                                                        data-boundary="viewport" aria-haspopup="true"
-                                                        aria-expanded="false"><span><svg xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
-                                                                height="18px" viewbox="0 0 24 24" version="1.1">
-                                                                <g stroke="none" stroke-width="1" fill="none"
-                                                                    fill-rule="evenodd">
-                                                                    <rect x="0" y="0" width="24"
-                                                                        height="24"></rect>
-                                                                    <circle fill="#000000" cx="5" cy="12"
-                                                                        r="2">
-                                                                    </circle>
-                                                                    <circle fill="#000000" cx="12" cy="12"
-                                                                        r="2">
-                                                                    </circle>
-                                                                    <circle fill="#000000" cx="19" cy="12"
-                                                                        r="2">
-                                                                    </circle>
-                                                                </g>
-                                                            </svg></span></button>
-                                                    <div class="dropdown-menu dropdown-menu-end border py-0"
-                                                        aria-labelledby="order-dropdown-0">
-                                                        <div class="py-2">
-                                                            <a class="dropdown-item" href="javascript:void(0);">Show</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);">Edit</a>
-                                                            <div class="dropdown-divider"></div><a
-                                                                class="dropdown-item text-danger"
-                                                                href="javascript:void(0);">Delete</a>
-                                                        </div>
-                                                    </div>
+                                                <div class="d-flex">
+                                                    <button type="button"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                            class="fas fa-pencil-alt"></i></button>
+                                                    <button type="button" class="btn btn-danger shadow btn-xs sharp"><i
+                                                            class="fa fa-trash"></i></button>
                                                 </div>
                                             </td>
                                         </tr>

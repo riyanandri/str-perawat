@@ -16,21 +16,10 @@ class StrController extends Controller
         $data = DB::table('detail_str')
                     ->join('dokumen', 'dokumen.id', '=', 'detail_str.dok_id')
                     ->orderBy('detail_str.id', 'DESC')
-                    ->get(['dokumen.url','detail_str.no_str','detail_str.berlaku_sd','detail_str.ket_str','detail_str.status']);
+                    ->get(['dokumen.url','detail_str.no_str','detail_str.berlaku_sd','detail_str.ket_str','dokumen.status_dokumen','detail_str.status_upload']);
 
         return view('perawat.dokumen.str.index', compact('data'));
     }
-
-//     public function data(Request $request)
-//     {
-//         $data = DB::table('dokumen')
-//                     ->leftJoin('detail_str', 'dokumen.id', '=', 'detail_str.dok_id')
-//                     ->get();
-//  //query get semua data ke model
-//         $form = view('perawat.dokumen.str.data', ['data' => $data]); //passing data ke view
-//         $data_array = array('data'=>''.$form.''); //convert ke bentuk array
-//         return response()->json($data_array);
-//     }
 
     public function create()
     {
@@ -46,7 +35,7 @@ class StrController extends Controller
             'berlaku_sd' => 'required',
             'ket_str' => 'required'
         ], [
-            'url.required' => 'Anda belum upload file STR',
+            'url.required' => 'Anda belum upload dokumen STR',
             'url.mimes' => 'file harus berupa pdf,jpg,jpeg,png',
             'url.max' => 'file terlalu besar, maksimal 5MB',
             'jenis.required' => 'Jenis dokumen tidak boleh kosong',
@@ -83,6 +72,6 @@ class StrController extends Controller
         $detail_str->ket_str = $request->ket_str;
         $detail_str->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('str.index');
     }
 }
