@@ -36,7 +36,7 @@
                     <span class="nav-text">Dokumen</span>
                 </a>
             </li>
-            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            {{-- <li class="{{ Request::is('dashboard') ? 'mm-active' : '' }}"><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                     <i class="fas fa-user"></i>
                     <span class="nav-text">Pengaturan Akun</span>
                 </a>
@@ -44,7 +44,7 @@
                     <li><a href="#">Update Akun</a></li>
                     <li><a href="">Detail Akun</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>
