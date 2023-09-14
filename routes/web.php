@@ -84,6 +84,11 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     Route::post('/jenis-pk', [JenisPkController::class, 'index'])->name('jenisPk.index');
     Route::get('/jenis-pk', [JenisPkController::class, 'index'])->name('jenisPk.index');
     Route::get('/jenis-pk/data', [JenisPkController::class, 'data'])->name('jenisPk.data');
+    Route::get('/jenis-pk/input', [JenisPkController::class, 'input'])->name('jenisPk.input');
+    Route::post('/jenis-pk/create', [JenisPkController::class, 'create'])->name('jenisPk.create');
+    Route::get('/jenis-pk/edit', [JenisPkController::class, 'edit'])->name('jenisPk.edit');
+    Route::post('/jenis-pk/update', [JenisPkController::class, 'update'])->name('jenisPk.update');
+    Route::delete('/jenis-pk/destroy/{id}', [JenisPkController::class, 'destroy'])->name('jenisPk.destroy');
 
     // area
     Route::post('/area', [AreaController::class, 'index'])->name('area.index');
