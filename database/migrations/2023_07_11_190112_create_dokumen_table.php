@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('dokumen', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pegawai_id');
+            $table->string('no_dokumen');
             $table->string('url');
-            $table->enum('status_dokumen', ['berlaku','kadaluarsa'])->default('berlaku');
             $table->enum('jenis', ['sipp','str','spkk']);
+            $table->date('berlaku_sd');
+            $table->enum('status', ['pending','ditolak','diterima'])->default('pending');
+            $table->text('ket_str');
             $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });

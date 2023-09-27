@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\StatusPegawaiController;
 use App\Http\Controllers\Admin\RuanganController;
 use App\Http\Controllers\Admin\JenisPkController;
 use App\Http\Controllers\Admin\AreaController;
-use App\Http\Controllers\Admin\DataDokumenController;
+use App\Http\Controllers\Admin\DokController;
 use App\Http\Controllers\Perawat\PegawaiController;
 use App\Http\Controllers\Perawat\DokumenController;
 use App\Http\Controllers\Perawat\StrController;
@@ -34,8 +34,13 @@ Route::middleware(['auth', 'user-access:perawat'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'perawatDashboard'])->name('dashboard');
 
     // lengkapi akun
-    Route::get('/complete-account', [PegawaiController::class, 'completeAccount'])->name('complete-account');
-    Route::post('/complete-account', [PegawaiController::class, 'save'])->name('complete-account.save');
+    Route::get('/lengkapi-akun', [PegawaiController::class, 'completeAccount'])->name('complete-account');
+    Route::post('/lengkapi-akun', [PegawaiController::class, 'save'])->name('complete-account.save');
+
+    // dokumen
+    Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumenPerawat.index');
+    Route::get('/dokumen/upload', [DokumenController::class, 'upload'])->name('dokumenPerawat.upload');
+    Route::post('/dokumen/upload', [DokumenController::class, 'store'])->name('dokumenPerawat.store');
 
     // str
     Route::get('/str', [StrController::class, 'index'])->name('str.index');
@@ -96,9 +101,10 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     Route::get('/area/data', [AreaController::class, 'data'])->name('area.data');
 
     // dokumen
-    Route::get('/dokumen/str', [DataDokumenController::class, 'str'])->name('dokumen.str');
+    Route::get('/dokumen', [DokController::class, 'index'])->name('dokumenAdmin.index');
+    Route::post('/dokumen/updateStatus', [DokController::class, 'updateStatus'])->name('dokumenAdmin.updateStatus');
 });
 
-Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
-    Route::get('/superadmin/dashboard', [DashboardController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
-});
+// Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
+//     Route::get('/superadmin/dashboard', [DashboardController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
+// });

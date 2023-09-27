@@ -32,13 +32,25 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="nama" class="form-label">Nama Lengkap</label>
-                                            <input type="text" class="form-control" id="nama" name="nama"
-                                                value="{{ Auth::user()->nama }}" disabled>
+                                            <input type="text"
+                                                class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
+                                                id="nama" name="nama" value="{{ Auth::user()->nama }}">
+                                            <div class="invalid-feedback">
+                                                @if ($errors->has('nama'))
+                                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="whatsapp" class="form-label">No WhatsApp</label>
-                                            <input type="number" class="form-control" id="whatsapp" name="whatsapp"
-                                                value="{{ Auth::user()->whatsapp }}" disabled>
+                                            <input type="number"
+                                                class="form-control{{ $errors->has('whatsapp') ? ' is-invalid' : '' }}"
+                                                id="whatsapp" name="whatsapp" value="{{ Auth::user()->whatsapp }}">
+                                            <div class="invalid-feedback">
+                                                @if ($errors->has('whatsapp'))
+                                                    <span class="text-danger">{{ $errors->first('whatsapp') }}</span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
 
@@ -123,6 +135,22 @@
                                             @if ($errors->has('alamat'))
                                                 <span class="text-danger">{{ $errors->first('alamat') }}</span>
                                             @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="photo" class="form-label">Photo</label>
+                                        <div class="input-group">
+                                            <div class="form-file">
+                                                <input type="file"
+                                                    class="form-file-input form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}"
+                                                    id="photo" name="photo" value="{{ Auth::user()->photo }}">
+                                                <div class="invalid-feedback">
+                                                    @if ($errors->has('photo'))
+                                                        <span class="text-danger">{{ $errors->first('photo') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 

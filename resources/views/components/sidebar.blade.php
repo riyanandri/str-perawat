@@ -63,9 +63,9 @@
                     <span class="nav-text">Data Pegawai</span>
                 </a>
             </li>
-            <li><a href="widget-basic.html" class="" aria-expanded="false">
+            <li><a href="{{ route('dokumenAdmin.index') }}" class="" aria-expanded="false">
                     <i class="fas fa-user"></i>
-                    <span class="nav-text">Pengaturan Akun</span>
+                    <span class="nav-text">Dokumen</span>
                 </a>
             </li>
         </ul>

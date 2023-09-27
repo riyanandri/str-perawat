@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Perawat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PegawaiController extends Controller
 {
@@ -37,12 +39,22 @@ class PegawaiController extends Controller
     public function save(Request $request)
     {
         $request->validate([
+            'nama' => 'required',
+            'whatsapp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'photo => required|mimes:jpg,jpeg,png|max:5120',
             'nip' => 'required|regex:/^\S*$/u|unique:pegawai,nip',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'pend_terakhir' => 'required',
             'alamat' => 'required',
         ],[
+            'nama.required' => 'Anda belum mengisi Nama Lengkap',
+            'whatsapp.required' => 'Anda belum mengisi Nomor Whatsapp',
+            'whatsapp.regex' => 'Nomor Whatsapp tidak valid',
+            'whatsapp.min' => 'Nomor Whatsapp minimal 10 digit',
+            'photo.required' => 'Anda belum mengupload foto profil',
+            'photo.mimes' => 'file harus berupa jpg,jpeg,png',
+            'photo.max' => 'file terlalu besar, maksimal 5MB',
             'nip.required' => 'Anda belum mengisi NIP',
             'nip.regex' => 'NIP tidak boleh ada spasi',
             'nip.unique' => 'NIP tersebut sudah terdaftar',
@@ -51,6 +63,22 @@ class PegawaiController extends Controller
             'pend_terakhir' => 'Anda belum mengisi pendidikan terakhir',
             'alamat' => 'Anda belum mengisi alamat',
         ]);
+
+        $user_id = Auth::user()->id;
+        $user = User::findOrFail($user_id);
+
+        $user->nama = $request->input('nama');
+        $user->whatsapp = $request->input('whatsapp');
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $ext = $photo->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $photo->move('uploads/profil/', $filename);
+            $user->photo = $filename;
+        }
+
+        $user->update();
 
         $pegawai = new Pegawai;
 

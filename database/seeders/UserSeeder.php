@@ -21,13 +21,13 @@ class UserSeeder extends Seeder
                'password'=> bcrypt('admin@123'),
                'whatsapp'=>'6285823670112',
             ],
-            [
-               'nama'=>'Super Admin',
-               'email'=>'superadmin@gmail.com',
-               'type'=>2,
-               'password'=> bcrypt('superadmin@123'),
-               'whatsapp'=>'6282145380579',
-            ],
+            // [
+            //    'nama'=>'Super Admin',
+            //    'email'=>'superadmin@gmail.com',
+            //    'type'=>2,
+            //    'password'=> bcrypt('superadmin@123'),
+            //    'whatsapp'=>'6282145380579',
+            // ],
             [
                'nama'=>'Perawat',
                'email'=>'perawat@gmail.com',

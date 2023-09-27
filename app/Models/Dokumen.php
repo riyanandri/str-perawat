@@ -25,7 +25,7 @@ class Dokumen extends Model
 
     public function str()
     {
-        return $this->hasOne(DetailStr::class);
+        return $this->hasOne(DetailStr::class, 'dok_id', 'id');
     }
 
     public function sipp()

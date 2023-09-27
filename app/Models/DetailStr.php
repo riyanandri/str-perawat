@@ -19,6 +19,11 @@ class DetailStr extends Model
         'status',
     ];
 
+    public function berlakuSd()
+    {
+        return \Carbon\Carbon::parse($this->attributes['berlaku_sd'])->translatedFormat('l, j F Y : h:i a');
+    }
+
     public function dokumen()
     {
         return $this->belongsTo(Dokumen::class);

@@ -21,7 +21,7 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                     <i class="fas fa-upload"></i>
                     <span class="nav-text">Upload Dokumen</span>
                 </a>
@@ -30,8 +30,8 @@
                     <li><a href="">SIPP</a></li>
                     <li><a href="#">SPKK</a></li>
                 </ul>
-            </li>
-            <li><a href="#" class="" aria-expanded="false">
+            </li> --}}
+            <li><a href="{{ route('dokumenPerawat.index') }}" class="" aria-expanded="false">
                     <i class="fas fa-file"></i>
                     <span class="nav-text">Dokumen</span>
                 </a>
