@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -45,6 +46,15 @@ class LoginController extends Controller
      *
      * @return RedirectResponse
      */
+
+    public function loginUrl(Request $request)
+    {
+        if (!$request->hasValidSignature()) {
+            abort(401);
+        }
+        $user = Auth::loginUsingId($request->user_id);
+        return redirect($request->url);
+    }
     public function login(Request $request): RedirectResponse
     {   
         $input = $request->all();

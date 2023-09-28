@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jenis', ['sipp','str','spkk']);
             $table->date('berlaku_sd');
             $table->enum('status', ['pending','ditolak','diterima'])->default('pending');
-            $table->text('ket_str');
+            $table->text('keterangan');
             $table->foreign('pegawai_id')->references('id')->on('pegawai');
             $table->timestamps();
         });

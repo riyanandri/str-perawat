@@ -1,77 +1,65 @@
 <div class="dlabnav">
-    <div class="dlabnav-scroll mm-active ps ps--active-y">
-        <ul class="metismenu " id="menu">
-            <li class="{{ Request::is('admin/dashboard') ? 'mm-active' : '' }}"><a href="{{ url('admin/dashboard') }}">
+    <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+            <li class="{{ Request::is('admin/dashboard') ? 'mm-active' : '' }}"><a href="{{ route('admin.dashboard') }}"
+                    class="" aria-expanded="false">
                     <i class="fas fa-home"></i>
-                    <span class="nav-text">Dashboard</span>
+                    <span class="nav-text">Dasbor</span>
                 </a>
             </li>
-
-            <li
-                class="{{ Request::is('admin/profesi') || Request::is('admin/status-pegawai') || Request::is('admin/ruangan') ? 'mm-active' : '' }}">
-                <a href="javascript:void()" aria-expanded="true">
+            <li class="{{ Request::is('admin/data-master/profesi*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('profesi.index') }}" class="" aria-expanded="false">
                     <i class="fas fa-folder"></i>
-                    <span class="nav-text">Data Master</span>
+                    <span class="nav-text">Profesi</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li class="{{ Request::is('admin/profesi') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/profesi') }}">Profesi</a></li>
-                    <li class="{{ Request::is('admin/status-pegawai') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/status-pegawai') }}">Status Pegawai</a></li>
-                    <li class="{{ Request::is('admin/ruangan') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/ruangan') }}">Ruangan</a></li>
-                    <li class="{{ Request::is('admin/jenis-pk') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/jenis-pk') }}">Jenis PK</a></li>
-                    <li class="{{ Request::is('admin/area') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/area') }}">Area</a></li>
-                </ul>
             </li>
-
-            {{-- <li
-                class="{{ Request::is('admin/profesi') || Request::is('admin/status-pegawai') || Request::is('admin/ruangan') || Request::is('admin/jenis-pk') || Request::is('admin/area') ? 'mm-active' : '' }}">
-                <a class="has-arrow" href="javascript:void()"
-                    aria-expanded="{{ Request::is('admin/profesi') || Request::is('admin/status-pegawai') || Request::is('admin/ruangan') || Request::is('admin/jenis-pk') || Request::is('admin/area') ? 'true' : 'false' }}">
+            <li class="{{ Request::is('admin/data-master/status-pegawai*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('status-pegawai.index') }}" class="" aria-expanded="false">
                     <i class="fas fa-folder"></i>
-                    <span class="nav-text">Data Master</span>
+                    <span class="nav-text">Status Pegawai</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li class="{{ Request::is('admin/profesi') ? 'mm-active' : '' }}"><a
-                            href="{{ url('admin/profesi') }}">Profesi</a>
-                    </li>
-                    <li class="{{ Request::is('status-pegawai') ? 'mm-active' : '' }}"><a
-                            href="{{ url('status-pegawai') }}">Status Pegawai</a></li>
-                    <li class="{{ Request::is('ruangan') ? 'mm-active' : '' }}"><a
-                            href="{{ url('ruangan') }}">Ruangan</a>
-                    </li>
-                    <li class="{{ Request::is('jenis-pk') ? 'mm-active' : '' }}"><a href="{{ url('jenis-pk') }}">Jenis
-                            PK</a></li>
-                    <li class="{{ Request::is('area') ? 'mm-active' : '' }}"><a href="{{ url('area') }}">Area</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class=""><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-file-import"></i>
-                    <span class="nav-text">Data Dokumen</span>
+            </li>
+            <li class="{{ Request::is('admin/data-master/ruangan*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('ruangan.index') }}" class="" aria-expanded="false">
+                    <i class="fas fa-folder"></i>
+                    <span class="nav-text">Ruangan</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('dokumen.str') }}">STR</a></li>
-                </ul>
-            </li> --}}
+            </li>
+            <li class="{{ Request::is('admin/data-master/jenis-pk*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('jenisPk.index') }}" class="" aria-expanded="false">
+                    <i class="fas fa-folder"></i>
+                    <span class="nav-text">Jenis PK</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('admin/data-master/area*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('area.index') }}" class="" aria-expanded="false">
+                    <i class="fas fa-folder"></i>
+                    <span class="nav-text">Area</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('admin/dokumen/sipp*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('dokumenAdmin.sipp') }}" class="" aria-expanded="false">
+                    <i class="fas fa-file"></i>
+                    <span class="nav-text">SIPP</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('admin/dokumen/spkk*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('dokumenAdmin.spkk') }}" class="" aria-expanded="false">
+                    <i class="fas fa-file"></i>
+                    <span class="nav-text">SPKK</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('admin/dokumen/str*') ? 'mm-active' : '' }}"><a
+                    href="{{ route('dokumenAdmin.str') }}" class="" aria-expanded="false">
+                    <i class="fas fa-file"></i>
+                    <span class="nav-text">STR</span>
+                </a>
+            </li>
             <li><a href="widget-basic.html" class="" aria-expanded="false">
                     <i class="fas fa-users"></i>
                     <span class="nav-text">Data Pegawai</span>
                 </a>
             </li>
-            <li><a href="{{ route('dokumenAdmin.index') }}" class="" aria-expanded="false">
-                    <i class="fas fa-user"></i>
-                    <span class="nav-text">Dokumen</span>
-                </a>
-            </li>
         </ul>
-
-        <div class="copyright">
-            <p><strong>STR Perawat</strong> © 2023 All Rights Reserved</p>
-        </div>
     </div>
 </div>

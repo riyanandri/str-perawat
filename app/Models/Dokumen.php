@@ -13,9 +13,12 @@ class Dokumen extends Model
 
     protected $fillable = [
         'pegawai_id',
+        'no_dokumen',
         'url',
-        'status',
         'jenis',
+        'berlaku_sd',
+        'status',
+        'keterangan'
     ];
 
     public function pegawai()
@@ -23,18 +26,13 @@ class Dokumen extends Model
         return $this->belongsTo(Pegawai::class);
     }
 
-    public function str()
+    public function getBerlakuSdAttribute()
     {
-        return $this->hasOne(DetailStr::class, 'dok_id', 'id');
+        return \Carbon\Carbon::parse($this->attributes['berlaku_sd'])->translatedFormat('l, d F Y');
     }
 
-    public function sipp()
+    public function getCreatedAtAttribute()
     {
-        return $this->hasOne(DetailSipp::class);
-    }
-
-    public function spkk()
-    {
-        return $this->hasOne(DetailSpkk::class);
+        return \Carbon\Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 }
