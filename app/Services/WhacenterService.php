@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 class WhacenterService
 {
 
-    protected string $to;
+    protected ?string $to;
     protected array $lines;
     protected string $baseUrl = '';
     protected string $deviceId = '';
@@ -45,11 +45,15 @@ class WhacenterService
 
     public function send(): mixed
     {
-        if ($this->to == '' || count($this->lines) <= 0) {
-            throw new \Exception('Message not correct.');
+        // if ($this->to == '' || count($this->lines) <= 0) {
+        //     throw new \Exception('Message not correct.');
+        // }
+        if ($this->to != '') {
+            $params = 'device_id=' . $this->deviceId . '&number=' . $this->to . '&message=' . urlencode(implode("\n", $this->lines));
+            $response = Http::get($this->baseUrl . '/send?' . $params);
+            return $response->body();
         }
-        $params = 'device_id=' . $this->deviceId . '&number=' . $this->to . '&message=' . urlencode(implode("\n", $this->lines));
-        $response = Http::get($this->baseUrl . '/send?' . $params);
-        return $response->body();
+
+        return 'Tidak ada no whatsapp yang terdaftar';
     }
 }

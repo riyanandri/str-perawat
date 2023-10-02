@@ -26,13 +26,17 @@ class Dokumen extends Model
         return $this->belongsTo(Pegawai::class);
     }
 
-    public function getBerlakuSdAttribute()
-    {
-        return \Carbon\Carbon::parse($this->attributes['berlaku_sd'])->translatedFormat('l, d F Y');
-    }
+    // public function getBerlakuSdAttribute()
+    // {
+    //     return \Carbon\Carbon::parse($this->attributes['berlaku_sd'])->translatedFormat('l, d F Y');
+    // }
 
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
+
+    protected $casts = [
+        'berlaku_sd' => 'date'
+    ];
 }

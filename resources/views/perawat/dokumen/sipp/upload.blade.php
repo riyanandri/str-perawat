@@ -47,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="no_dokumen" class="form-label">No SIPP</label>
-                                            <input type="number"
+                                            <input type="text"
                                                 class="form-control{{ $errors->has('no_dokumen') ? ' is-invalid' : '' }}"
                                                 id="no_dokumen" name="no_dokumen">
                                             <div class="invalid-feedback">

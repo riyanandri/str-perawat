@@ -39,8 +39,6 @@ class PegawaiController extends Controller
     public function save(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'whatsapp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'photo => required|mimes:jpg,jpeg,png|max:5120',
             'nip' => 'required|regex:/^\S*$/u|unique:pegawai,nip',
             'tempat_lahir' => 'required',
@@ -48,10 +46,6 @@ class PegawaiController extends Controller
             'pend_terakhir' => 'required',
             'alamat' => 'required',
         ],[
-            'nama.required' => 'Anda belum mengisi Nama Lengkap',
-            'whatsapp.required' => 'Anda belum mengisi Nomor Whatsapp',
-            'whatsapp.regex' => 'Nomor Whatsapp tidak valid',
-            'whatsapp.min' => 'Nomor Whatsapp minimal 10 digit',
             'photo.required' => 'Anda belum mengupload foto profil',
             'photo.mimes' => 'file harus berupa jpg,jpeg,png',
             'photo.max' => 'file terlalu besar, maksimal 5MB',
@@ -67,9 +61,6 @@ class PegawaiController extends Controller
         $user_id = Auth::user()->id;
         $user = User::findOrFail($user_id);
 
-        $user->nama = $request->input('nama');
-        $user->whatsapp = $request->input('whatsapp');
-
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $ext = $photo->getClientOriginalExtension();
@@ -80,22 +71,22 @@ class PegawaiController extends Controller
 
         $user->update();
 
-        $pegawai = new Pegawai;
+        $dataPegawai = [
+            'nip' => $request->nip,
+            'user_id' => $user_id,
+            'status_id' => $request->status_id,
+            'gender' => $request->gender,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'pend_terakhir' => $request->pend_terakhir,
+            'alamat' => $request->alamat,
+            'profesi_id' => $request->profesi_id,
+            'ruangan_id' => $request->ruangan_id,
+            'pk_id' => $request->pk_id,
+            'area_id' => $request->area_id,
+        ];
 
-        $pegawai->nip = $request->input('nip');
-        $pegawai->user_id = $request->input('user_id');
-        $pegawai->status_id = $request->input('status_id');
-        $pegawai->gender = $request->input('gender');
-        $pegawai->tempat_lahir = $request->input('tempat_lahir');
-        $pegawai->tgl_lahir = $request->input('tgl_lahir');
-        $pegawai->pend_terakhir = $request->input('pend_terakhir');
-        $pegawai->alamat = $request->input('alamat');
-        $pegawai->profesi_id = $request->input('profesi_id');
-        $pegawai->ruangan_id = $request->input('ruangan_id');
-        $pegawai->pk_id = $request->input('pk_id');
-        $pegawai->area_id = $request->input('area_id');
-
-        $pegawai->save();
+        Pegawai::create($dataPegawai);
 
         return redirect()->route('dashboard');
     }

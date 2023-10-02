@@ -16,7 +16,13 @@ class SippController extends Controller
 {
     public function index()
     {
-        $data = Dokumen::orderBy('created_at', 'DESC')->where('jenis', 'sipp')->get();
+        $data = Dokumen::select('*')
+                ->join('pegawai', 'pegawai.id', '=', 'dokumen.pegawai_id')
+                ->where('pegawai.user_id', auth()->user()->id)
+                ->where('dokumen.jenis', 'sipp')
+                ->orderBy('dokumen.created_at', 'DESC')
+                ->get();
+                
         Auth::user()->unreadNotifications->where('id', request('id'))->first()?->markAsRead();
 
         return view('perawat.dokumen.sipp.index', compact('data'));
@@ -34,7 +40,7 @@ class SippController extends Controller
             'jenis' => 'required',
             'no_dokumen' => 'required|regex:/^\S*$/u|unique:dokumen,no_dokumen',
             'berlaku_sd' => 'required',
-            'keterangan' => 'required'
+            // 'keterangan' => 'required'
         ], [
             'url.required' => 'Anda belum upload dokumen',
             'url.mimes' => 'file harus berupa pdf,jpg,jpeg,png',
@@ -44,7 +50,7 @@ class SippController extends Controller
             'no_dokumen.regex' => 'No Dokumen tidak boleh ada spasi',
             'no_dokumen.unique' => 'No Dokumen sudah terdaftar',
             'berlaku_sd' => 'Masa berlaku Dokumen tidak boleh kosong', 
-            'keterangan' => 'Keterangan Dokumen tidak boleh kosong'
+            // 'keterangan' => 'Keterangan Dokumen tidak boleh kosong'
         ]);
 
         $pegawai_id = Pegawai::orderBy('id', 'DESC')->select('id')->first();

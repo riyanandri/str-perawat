@@ -134,7 +134,3 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     Route::get('/dokumen', [DokController::class, 'index'])->name('dokumenAdmin.index');
     Route::post('/dokumen/updateStatus', [DokController::class, 'updateStatus'])->name('dokumenAdmin.updateStatus');
 });
-
-// Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
-//     Route::get('/superadmin/dashboard', [DashboardController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
-// });

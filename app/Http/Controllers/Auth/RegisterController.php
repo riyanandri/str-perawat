@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/complete-account';
+    protected $redirectTo = '/lengkapi-akun';
 
     /**
      * Create a new controller instance.
@@ -61,9 +61,9 @@ class RegisterController extends Controller
 
         return Validator::make($data, [
             'nama' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'whatsapp' => ['required', 'min:11', 'numeric'],
+            'whatsapp' => ['required', 'numeric', 'digits_between:11,13', 'unique:users,whatsapp'],
         ]);
     }
 

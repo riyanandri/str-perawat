@@ -34,7 +34,7 @@
                                             <label for="nama" class="form-label">Nama Lengkap</label>
                                             <input type="text"
                                                 class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}"
-                                                id="nama" name="nama" value="{{ Auth::user()->nama }}">
+                                                id="nama" name="nama" value="{{ Auth::user()->nama }}" disabled>
                                             <div class="invalid-feedback">
                                                 @if ($errors->has('nama'))
                                                     <span class="text-danger">{{ $errors->first('nama') }}</span>
@@ -45,7 +45,8 @@
                                             <label for="whatsapp" class="form-label">No WhatsApp</label>
                                             <input type="number"
                                                 class="form-control{{ $errors->has('whatsapp') ? ' is-invalid' : '' }}"
-                                                id="whatsapp" name="whatsapp" value="{{ Auth::user()->whatsapp }}">
+                                                id="whatsapp" name="whatsapp" value="{{ Auth::user()->whatsapp }}"
+                                                disabled>
                                             <div class="invalid-feedback">
                                                 @if ($errors->has('whatsapp'))
                                                     <span class="text-danger">{{ $errors->first('whatsapp') }}</span>
